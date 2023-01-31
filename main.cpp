@@ -3,81 +3,75 @@
 using namespace std;
 
 
-int* insertfirst(int arr[],int x,int n){
+int* insertfirst(int array[],int number,int n){
     int i;
     for (i = n; i >= 0; i--){
-        arr[i] = arr[i - 1];}
-    arr[0] = x;
-    return arr;
+        array[i] = array[i - 1];}
+    array[0] = number;
+    return array;
 }
 
-int* insertlast(int arr[],int x,int n){
+int* insertlast(int array[],int number,int n){
     int i;
     for (i = 0; i < n; i++){
-        arr[i] = arr[i];}
-    arr[n-1] = x;
-    return arr;
+        array[i] = array[i];}
+    array[n-1] = number;
+    return array;
 }
 
-int *insertpos(int arr[],int x, int pos,int n){
+int *insertpos(int array[],int number, int pos,int n){
     int i;
-    n++;
     for (i = n; i >= pos; i--){
-        arr[i] = arr[i - 1];}
-    arr[pos - 1] = x;
-    return arr;
+        array[i] = array[i - 1];}
+    array[pos - 1] = number;
+    return array;
 }
-int *traverse(int arr[],int n){
+int *traverse(int array[],int n){
     int i;
     for (i = 0; i <n; i++){
-        cout << arr[i] << " ";}
+        cout << array[i] << " ";}
     cout << endl;
-    return arr;
+    return array;
 }
-int *deletefirst(int arr[], int n ){
+int *deletefirst(int array[], int n ){
     int i;
     for (i = 0; i <= n; i++){
-        arr[i] = arr[i + 1];}
+        array[i] = array[i + 1];}
 
-    return arr;
+    return array;
 }
-int *deletelast(int arr[],int n){
+int *deletelast(int array[],int n){
     int i;
     for (i = 0;i<n; i++){
-        arr[i] = arr[i];}
-    return arr;
+        array[i] = array[i];}
+    return array;
 }
-int *deletepos(int arr[], int x, int n)
-{
-    int i, j;
-    for(i=0; i<n; i++)
-    {
-        if(arr[i]==x)
-        {
-            for(j=i; j<(n-1); j++)
-                arr[j] = arr[j+1];
-             }
+int *deletepos(int array[], int pos, int n)
+{int i;
+    for(i=pos-1;i<n;i++){
+        array[i]=array[i+1];
     }
-    return arr;
+
+    return array;
 }
 
 int main()
 {
-    int arr[100];
+    int array[100];
     int i,N, n;
     cout<<"Input Total Number of data:";
     cin>>N;
     n=N;
     for(i=0;i<N;i++){
         cout<<"data "<< i+1<<"=";
-        cin>>arr[i];
+        cin>>array[i];
     }
     for (i = 0; i < n; i++)
-        cout << arr[i] << " ";
+        cout << array[i] << " ";
         cout << endl;
 start:
     char choose;
-    cout<<"Insert data = i"<< " - "<<"delete data=d"<<endl;
+    cout<<"Insert data = i"<< endl<<"delete data=d"<<endl;
     cout<<"Enter i or D =";
     cin>>choose;
     
@@ -86,18 +80,19 @@ start:
         cout<<"enter the number:";
         cin>>num;
         char insert;
-        cout<<"insert first=f  last=l  possition=p:";
+        cout<<"insert first=f"<<endl<<"insert last=l"<<endl<<"insert possition=p"<<endl;
+        cout<<"Enter 'f' or 'l' or 'p':";
         cin>>insert;
         switch (insert) {
                
             case 'f':
                 n++;
-                insertfirst(arr,num,n );
+                insertfirst(array,num,n );
                 break;
                 
             case 'l':
                 n++;
-                insertlast(arr,num,n );
+                insertlast(array,num,n );
                 break;
                 
             case 'p':
@@ -105,7 +100,7 @@ start:
                 cout<<"possition:";
                 cin>>pos;
                 n++;
-                insertpos(arr,num,pos,n );
+                insertpos(array,num,pos,n );
                 break;
         }
         goto select;
@@ -117,19 +112,20 @@ start:
         switch (del) {
             case 'f':
                 n--;
-                deletefirst(arr,n );
+                deletefirst(array,n );
                 break;
                 
             case 'l':
                 n--;
-                deletelast(arr,n );
+                deletelast(array,n );
                 break;
                 
             case 'p':
                 int pos;
                 cout<<"possition:";
                 cin>>pos;
-                deletepos(arr,pos,n );
+                n--;
+                deletepos(array,pos,n );
                 break;
         }
         goto select;
@@ -138,7 +134,7 @@ start:
         char select;
         cout<<"if you see the array- y"<<endl<< "go to home = h"<<endl<<"Reopen=r"<<endl<<"Enter:";
         cin>>select;
-        if (select=='y'){traverse(arr,n); goto select; }
+        if (select=='y'){traverse(array,n); goto select; }
         if(select=='h'){main();}
         if(select=='r'){goto start;}
     return 0;
